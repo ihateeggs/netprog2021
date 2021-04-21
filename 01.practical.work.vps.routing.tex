@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{01.practical.work.vps.routing}
+\author{Nguyen Khanh Lien - BI10-097}
+\date{April 2021}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Ping ussth.edu.vn}
+\hspace{20}The result of ping usth.edu.vn:\\
+PING usth.edu.vn (119.17.215.232) 56(84) bytes of data.
+64 bytes from static.netnam.vn (119.17.215.232): icmp_seq=1 ttl=50 time=46.8 ms\\
+64 bytes from static.netnam.vn (119.17.215.232): icmp_seq=2 ttl=50 time=47.0 ms\\
+64 bytes from static.netnam.vn (119.17.215.232): icmp_seq=3 ttl=50 time=46.9 ms\\
+64 bytes from static.netnam.vn (119.17.215.232): icmp_seq=4 ttl=50 time=46.9 ms\\
+64 bytes from static.netnam.vn (119.17.215.232): icmp_seq=5 ttl=50 time=47.1 ms\\
+^C\\
+--- usth.edu.vn ping statistics ---\\
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms\\
+rtt min/avg/max/mdev = 46.832/46.955/47.080/0.091 ms\\
+
+\section{Traceroute}
+\subsection{Traceroute usth.edu.vn}
+\hspace{20}After traceroute usth.edu.vn, there are 15 hops:\\
+traceroute to usth.edu.vn (119.17.215.232), 30 hops max, 60 byte packets\\
+ 1  * * *\\
+ 2  * * *\\
+ 3  * * *\\
+ 4  * localhost (27.68.255.41)  56.787 ms *\\
+ 5  * * *\\
+ 6  * * *\\
+ 7  * static.netnam.vn (119.17.219.49)  49.824 ms  52.296 ms\\
+ 8  * * *\\
+ 9  * * *\\
+10  * * *\\
+11  * * *\\
+12  * * *\\
+13  * * *\\
+14  * * *\\
+15  * * *\\
+
+\subsection{Trace to my own computer}
+\hspace{20}After traceroute my own computer, there is only 1 hop:\\
+traceroute to 10.148.0.2 (10.148.0.2), 30 hops max, 60 byte packets\\
+ 1  instance-1.c.festive-nova-311303.internal (10.148.0.2)  0.028 ms  0.006 ms  0.006 ms\\
+
+\end{document}
