@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{2.practical.work.gethostbyname}
+\author{Nguyen Khanh Lien}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{On my laptop}
+\subsection{usth.edu.vn}
+\begin{lstlisting}
+\\ihateeggs@ihateeggs-VirtualBox:~/workspace$ ./2.practical.work.gethostbyname
+\\Enter hostname: usth.edu.vn
+\\Resolved IP address of usth.edu.vn:
+\\  -119.17.215.232
+\\ 
+\\ End!
+\end{lstlisting}
+
+\subsection{abc.com}
+\begin{lstlisting}
+\\ihateeggs@ihateeggs-VirtualBox:~/workspace$ ./2.practical.work.gethostbyname 
+\\Enter hostname: abc.com
+\\Resolved IP address of abc.com:
+\\	-54.192.22.73
+\\ 	-54.192.22.28
+\\ 	-54.192.22.27
+\\ 	-54.192.22.16
+\\ 
+\\ End!
+\end{lstlisting}
+
+\section{On VPS}
+\subsection{usth.edu.vn}
+\begin{lstlisting}
+\\ihateeggs@instance-1:~/netprog2021$ ./2.practical.work.gethostbyname 
+\\Enter hostname: usth.edu.vn
+\\Resolved IP address of usth.edu.vn:
+\\	-119.17.215.232
+\\ 
+\\ End!
+\end{lstlisting}
+
+\subsection{abc.com}
+\begin{lstlisting}
+\\ihateeggs@instance-1:~/netprog2021$ ./2.practical.work.gethostbyname \
+\\Enter hostname: abc.com
+\\Resolved IP address of abc.com:
+\\	-13.35.13.6
+\\ 	-13.35.13.65
+\\ 	-13.35.13.31
+\\ 	-13.35.13.121
+\\ 
+\\ End!
+
+\end{lstlisting}
+
+\section{Comparision}
+The IP address of usth.edu.vn is still the same either on my computer or on VPS.
+The IP address of abc.com on my computer is different from my VPS.
+On my computer: 54.192.22.73, and on VPS:13.35.13.6
+
+\end{document}
