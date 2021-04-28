@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
        printf("gethostbyname() failed\n");
     } else {
        printf("Resolved IP address of %s:\n", host->h_name);
-       int i=0;
+       unsigned int i=0;
        while ( host -> h_addr_list[i] != NULL) {
           printf( "\t-%s\n ", inet_ntoa( *( struct in_addr*)( host -> h_addr_list[i])));
           i++;
