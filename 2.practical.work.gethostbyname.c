@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
           printf( "\t-%s\n ", inet_ntoa( *( struct in_addr*)( host -> h_addr_list[i])));
           i++;
        }
-       printf("End!\n");
+       printf("\tEnd!\n");
     }
 
 }
