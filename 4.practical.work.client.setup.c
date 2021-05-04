@@ -29,7 +29,7 @@ int main(int argc, char const *agrv[]){
           i++;
     }
     printf("\n");
-
+    }
 
     int sockfd, clen, clientfd;
     struct sockaddr_in saddr, caddr;
