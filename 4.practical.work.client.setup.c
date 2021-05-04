@@ -48,7 +48,7 @@ int main(int argc, char const *agrv[]){
 
     if (connect(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
         printf(“Cannot connect\n”);
-        perror("Connect\n")
+        perror("Connect\n");
     }
 
     printf("Client accepted\n");
