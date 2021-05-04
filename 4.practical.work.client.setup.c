@@ -46,20 +46,9 @@ int main(int argc, char const *agrv[]){
     saddr.sin_addr.s_addr = htonl(INADDR_ANY);
     saddr.sin_port = htons(port);
 
-    if (bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
-      printf("Error binding\n");
-      exit(1);
-    }
-
-    if (listen(sockfd, 5) < 0) {
-      printf("Error listening\n");
-      exit(1);
-    }
-
-    clen=sizeof(caddr);
-    if ((clientfd=accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0) {
-      printf("Error accepting connection\n");
-      exit(1);
+    if (connect(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
+        printf(“Cannot connect\n”);
+        perror("Connect\n")
     }
 
     printf("Client accepted\n");
