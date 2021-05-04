@@ -40,4 +40,4 @@ int main(int argc, char const *agrv[]){
     printf("Client accepted\n");
 
     return 1;
-  }
+}
