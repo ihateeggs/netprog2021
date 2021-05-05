@@ -9,13 +9,13 @@
 int main(int argc, char const *agrv[]){
     struct hostent *host;
     if (argc < 2) {
-      char hostName[200];
-      printf("Enter hostname: ");
-      scanf("%s",hostName);
-      host = gethostbyname(hostName);
+        char hostName[200];
+        printf("Enter hostname: ");
+        scanf("%s",hostName);
+        host = gethostbyname(hostName);
     }
     else {
-      host = gethostbyname(agrv[1]);
+        host = gethostbyname(agrv[1]);
     }
 
     if (host == NULL) {
@@ -33,8 +33,8 @@ int main(int argc, char const *agrv[]){
 
     int sockfd;
     if ((sockfd=socket(AF_INET, SOCK_STREAM, 0)) <0){
-      printf("Error creating socket\n");
-      exit(1);
+        printf("Error creating socket\n");
+        exit(1);
     }
 
     struct sockaddr_in saddr;
@@ -46,7 +46,7 @@ int main(int argc, char const *agrv[]){
         printf("Cannot connect\n");
         perror("Connect\n");
     }else{
-        printf("------Successfull connect to the server!------\n");
-    }
+        printf("\t\t------Successfully connected to the server!------\n");
+     }
     return 1;
 }
