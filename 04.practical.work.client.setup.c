@@ -46,7 +46,7 @@ int main(int argc, char const *agrv[]){
         printf("Cannot connect\n");
         perror("Connect\n");
     }else{
-        printf("successfull connect to the server!");
+        printf("------Successfull connect to the server!------\n");
     }
     return 1;
 }
