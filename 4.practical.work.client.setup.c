@@ -31,27 +31,21 @@ int main(int argc, char const *agrv[]){
     printf("\n");
     }
 
-    int sockfd, clen, clientfd;
-    struct sockaddr_in saddr, caddr;
-    unsigned short port = 8784;
-    sockfd=socket(AF_INET, SOCK_STREAM, 0);
-
-    if (sockfd < 0) {
+    int sockfd;
+    if ((sockfd=socket(AF_INET, SOCK_STREAM, 0)) <0){
       printf("Error creating socket\n");
       exit(1);
     }
 
+    struct sockaddr_in saddr;
     memset(&saddr, 0, sizeof(saddr));
     saddr.sin_family = AF_INET;
-    saddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    saddr.sin_port = htons(port);
-
+    memcpy((char *) &saddr.sin_addr.s_addr, host->h_addr_list[0], host->h_length);
+    saddr.sin_port = htons(8784);
     if (connect(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
-        printf(“Cannot connect\n”);
+        printf("Cannot connect\n");
         perror("Connect\n");
     }
-
-    printf("Client accepted\n");
 
     return 1;
 }
