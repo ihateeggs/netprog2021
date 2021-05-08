@@ -39,6 +39,7 @@ int main(int argc, char const *agrv[]){
     }else{}
 
     printf("Client accepted\n");
+    printf("\t \tPlease start first!\n");
 
     while (1) {
         char s[1000];

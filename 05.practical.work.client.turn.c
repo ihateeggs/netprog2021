@@ -47,7 +47,9 @@ int main(int argc, char const *agrv[]){
         printf("Cannot connect\n");
         perror("Connect\n");
     }
-    printf("------successfull connect to the server!------\n");
+    printf("------Successfully connect to the server!------\n");
+    printf("\t \tPlease wait for the server to send the message first\n");
+    
     while (1) {
         char s[1000];
         memset(s, 0, 1000);
