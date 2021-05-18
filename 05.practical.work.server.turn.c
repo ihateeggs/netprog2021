@@ -13,8 +13,8 @@ int main(int argc, char const *agrv[]){
     sockfd=socket(AF_INET, SOCK_STREAM, 0);
 
     if (sockfd < 0) {
-      printf("Error creating socket\n");
-      exit(1);
+        printf("Error creating socket\n");
+        exit(1);
     }
 
     memset(&saddr, 0, sizeof(saddr));
@@ -43,14 +43,14 @@ int main(int argc, char const *agrv[]){
 
     while (1) {
         char s[1000];
-		memset(s, 0, 1000);
-		read(clientfd, s, 1000);
-		s[strlen(s) - 1] = 0;
-		printf("Client says: %s\n", s);
+        memset(s, 0, 1000);
+        read(clientfd, s, 1000);
+        s[strlen(s) - 1] = 0;
+        printf("Client says: %s\n", s);
 
-		printf("Server> ");
-      	fgets\(s, 1000, stdin);
-      	write(clientfd, s, strlen(s));
+        printf("Server> ");
+        fgets\(s, 1000, stdin);
+        write(clientfd, s, strlen(s));
     }
 
     return 1;
