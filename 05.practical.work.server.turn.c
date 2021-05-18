@@ -38,14 +38,13 @@ int main(int argc, char const *agrv[]){
         exit(1);
     }else{}
 
-    printf("Client accepted\n");
+    printf("\t \t------Client accepted!------\n\n");
     printf("\t \tPlease start first!\n");
 
     while (1) {
         char s[1000];
         memset(s, 0, 1000);
         read(clientfd, s, 1000);
-        s[strlen(s) - 1] = 0;
         printf("Client says: %s\n", s);
 
         printf("Server> ");

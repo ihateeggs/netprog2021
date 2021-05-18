@@ -20,14 +20,14 @@ int main(int argc, char const *agrv[]){
     }
 
     if (host == NULL) {
-         printf("gethostbyname() failed\n");
+        printf("gethostbyname() failed\n");
     } 
     else {
-         printf("Resolved IP address of %s:\n", host->h_name);
-         unsigned int i=0;
-         while ( host -> h_addr_list[i] != NULL) {
+        printf("Resolved IP address of %s:\n", host->h_name);
+        unsigned int i=0;
+        while ( host -> h_addr_list[i] != NULL) {
             printf( "\t-%s\n ", inet_ntoa( *( struct in_addr*)( host -> h_addr_list[i])));
-            i++;
+        i++;
     }
     printf("\n");
     }
@@ -47,7 +47,7 @@ int main(int argc, char const *agrv[]){
         printf("Cannot connect\n");
         perror("Connect\n");
     }
-    printf("------Successfully connect to the server!------\n");
+    printf("\t \t------Successfully connect to the server!------\n\n");
     printf("\t \tPlease wait for the server to send the message first\n");
     
     while (1) {
@@ -58,9 +58,8 @@ int main(int argc, char const *agrv[]){
         write(sockfd, s, strlen(s));
 
         read(sockfd, s, 1000);
-        s[strlen(s) - 1] = 0;
         printf("Server says: %s\n", s);
     }
 
-    return 1;
+        return 1;
 }
