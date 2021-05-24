@@ -11,11 +11,10 @@ int main(int argc, char const *agrv[]){
     struct sockaddr_in saddr, caddr;
     unsigned short port = 8784;
     sockfd=socket(AF_INET, SOCK_STREAM, 0);
-    char buffer[1024];
 
     if (sockfd < 0) {
-        printf("Error creating socket\n");
-        exit(1);
+      printf("Error creating socket\n");
+      exit(1);
     }
 
     memset(&saddr, 0, sizeof(saddr));
@@ -37,34 +36,32 @@ int main(int argc, char const *agrv[]){
     if ((clientfd=accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0) {
         printf("Error accepting connection\n");
         exit(1);
-    }else{}
+    }
 
     printf("\t \t------Client accepted!------\n\n");
     printf("\t \tPlease start first!\n");
 
     while (1) {
         char buffer[1024];
+        char buffer2[1000];
         const char delim = '\n';
-        for (int i = 0; i < 1024; i++) buffer[i]=0;
+		for (int i = 0; i < 1024; i++) buffer[i]=0;
+
         printf("Server> ");
-        bzero(buffer,1024);
-
-        int j = 0;
-        j = read(sockfd, buffer, 1023);
-
-        if (j < 0){
-            printf("Reading error.\n");
-        }
-         printf("Server> ");
-
-        bzero(buffer,1024);
-        printf("Client says: %s\n", buffer);
         fgets(buffer, 1024, stdin);
-        j = write(sockfd, buffer, strlen(buffer));
+        write(clientfd, buffer, strlen(buffer));
+        
 
-        if(j <= 0 && buffer[j-1] == delim){
-             printf("Writing error.\n");
-         }
+        ssize_t len = 1;
+        bzero(buffer2,sizeof(buffer2));
+        while (buffer2[len-1] != delim){
+            len = read(clientfd, buffer2, 1000);
+            if (len > 0){
+                strncat(buffer, buffer2, len);
+            }
+            bzero(buffer2, sizeof(buffer2));
+        }
+        printf("Client says: %s\n", buffer);
     }
-    return 1;
+    return 0;
 }

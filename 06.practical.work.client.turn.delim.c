@@ -20,14 +20,14 @@ int main(int argc, char const *agrv[]){
     }
 
     if (host == NULL) {
-        printf("gethostbyname() failed\n");
+         printf("gethostbyname() failed\n");
     } 
     else {
         printf("Resolved IP address of %s:\n", host->h_name);
         unsigned int i=0;
         while ( host -> h_addr_list[i] != NULL) {
             printf( "\t-%s\n ", inet_ntoa( *( struct in_addr*)( host -> h_addr_list[i])));
-        i++;
+            i++;
     }
     printf("\n");
     }
@@ -47,33 +47,30 @@ int main(int argc, char const *agrv[]){
         printf("Cannot connect\n");
         perror("Connect\n");
     }
-    printf("\t \t------Successfully connect to the server!------\n\n");
+    printf("\t \t------Successfull connect to the server!------\n");
     printf("\t \tPlease wait for the server to send the message first\n");
     
     while (1) {
         char buffer[1024];
+        char buffer2[1000];
         const char delim = '\n';
+		for (int i = 0; i < 1024; i++) buffer[i]=0;
 
-        printf("Client> ");
-        bzero(buffer,1024);
-        fgets(buffer, 1024, stdin);
-        int j = 0;
-        j = write(sockfd, buffer, strlen(buffer));
-        strncat(buffer,sizeof(j),1023);
-
-        for (int i = 0; i < 1024; i++) buffer[i]=0;
-        if (j < 0){
-            printf("Writing error.");
+        ssize_t len = 1;
+        bzero(buffer2,sizeof(buffer2));
+        while (buffer2[len-1] != delim){
+            len = read(sockfd, buffer2, 1000);
+            if (len > 0){
+                strncat(buffer, buffer2, len);
+            }
+            bzero(buffer2, sizeof(buffer2));
         }
 
-        bzero(buffer,1024);
-        j = read(sockfd, buffer, 1023);
-
-        if(j <= 0 && buffer[j-1] == delim){
-             printf("Reading error.");
-         }
-
         printf("Server says: %s\n", buffer);
+
+        printf("Client> ");
+        fgets(buffer, 1024, stdin);
+        write(sockfd, buffer, strlen(buffer));
     }
-        return 1;
+    return 0;
 }
