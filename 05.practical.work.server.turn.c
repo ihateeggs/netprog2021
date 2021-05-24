@@ -44,12 +44,13 @@ int main(int argc, char const *agrv[]){
     while (1) {
         char s[1000];
         memset(s, 0, 1000);
+        printf("Server> ");
+        fgets(s, 1000, stdin);
+        write(clientfd, s, strlen(s));
+        
+        memset(s, 0, 1000);
         read(clientfd, s, 1000);
         printf("Client says: %s\n", s);
-
-        printf("Server> ");
-        fgets\(s, 1000, stdin);
-        write(clientfd, s, strlen(s));
     }
 
     return 1;

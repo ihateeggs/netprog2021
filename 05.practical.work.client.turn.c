@@ -54,7 +54,7 @@ int main(int argc, char const *agrv[]){
         char s[1000];
         memset(s, 0, 1000);
         printf("Client> ");
-        fgets(s, 200, stdin);
+        fgets(s, 1000, stdin);
         write(sockfd, s, strlen(s));
 
         read(sockfd, s, 1000);
