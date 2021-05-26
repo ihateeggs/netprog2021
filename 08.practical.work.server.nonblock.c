@@ -25,19 +25,14 @@ int main(int argc, char const *agrv[]){
     saddr.sin_addr.s_addr = htonl(INADDR_ANY);
     saddr.sin_port = htons(port);
     
-//reuse address
     if ((sockfd=socket(AF_INET, SOCK_STREAM, 0)) <0){
         printf("Error creating socket\n");
         exit(1);
     }
+//reuse address
     setsockopt(sockfd, SOL_SOCKET,
     SO_REUSEADDR, &(int){ 1 },
     sizeof(int));
-    
-// nonblocking
-    int fl = fcntl(sockfd, F_GETFL, 0);
-	fl |= O_NONBLOCK;
-	fcntl(sockfd, F_SETFL, fl);
 
     if (bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
         printf("Error binding\n");
@@ -60,41 +55,43 @@ int main(int argc, char const *agrv[]){
     while (1) {
         clientfd = accept(sockfd, (struct sockaddr *) &caddr, &clen);
 		if (clientfd > 0) {
-			int fl = fcntl(clientfd, F_GETFL, 0);
-			fl |= O_NONBLOCK;
-			fcntl(clientfd, F_SETFL, fl);
-			printf("Successfully accepted a client\n");
-			while (1) {
-				char buffer[1024];
+            int fl = fcntl(clientfd, F_GETFL, 0);
+            fl |= O_NONBLOCK;
+            fcntl(clientfd, F_SETFL, fl);
+            printf("Successfully accepted a client\n");
+            while (1) {
+                char buffer[1024];
                 char buffer2[1000];
                 const char delim = '\n';
-		        for (int i = 0; i < 1024; i++) buffer[i]=0;
+                for (int i = 0; i < 1024; i++) buffer[i]=0;
 
                 printf("Server> ");
                 fgets(buffer, 1024, stdin);
                 write(clientfd, buffer, strlen(buffer));
-				ssize_t len = 1;
+
+                ssize_t len = 1;
                 bzero(buffer2,sizeof(buffer2));
                 while (buffer2[len-1] != delim){
                     len = read(clientfd, buffer2, 1000);
                     if (len > 0){
                         strncat(buffer, buffer2, len);
-                }
+                    }
                 bzero(buffer2, sizeof(buffer2));
                 }
-				struct pollfd input[1] = {{.fd = 0, .events = POLLIN}};
-				if (poll(input, 1, 100) > 0) {
-		      		fgets(buffer, 1000, stdin);
-			      	write(clientfd, buffer, strlen(buffer));
-			    }
+
+                struct pollfd input[1] = {{.fd = 0, .events = POLLIN}};
+                if (poll(input, 1, 100) > 0) {
+                    fgets(buffer, 1000, stdin);
+                    write(clientfd, buffer, strlen(buffer));
+                }
                 if (strcmp(buffer, "/dc") == 0) {
-	      	    shutdown(clientfd, SHUT_RDWR);
-	      	    close(clientfd);
-	      	    printf("!!! SERVER DISCONNECTED \n");
-	      	    break;
-	      	    }
-			}
-		}  
-	}
+                    shutdown(clientfd, SHUT_RDWR);
+                    close(clientfd);
+                    printf("!!! SERVER DISCONNECTED \n");
+                    break;
+                }
+            }
+        }  
+    }
     return 0;
 }
