@@ -96,7 +96,7 @@ int main(int argc, char const *agrv[]){
 				struct pollfd input[1] = {{.fd = 0, .events = POLLIN}};
 				if (poll(input, 1, 100) > 0) {
 		      		printf("Server> ");
-      	            scanf(s, 1000, stdin);
+                    scanf(s, 1000, stdin);
 			      	write(clientfd, s, strlen(s));
 			    }
 			}
